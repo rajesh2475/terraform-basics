@@ -182,7 +182,7 @@ variable files {
 ``` 
 count will create as array in state file, and uses the index asreference. so if you just "a.txt" from the list and do terraform apply it will delete both the files and recreate "b.txt"
 
-# For each (we can overcome the above issue because here data is stored in map in state file)
+### For each (we can overcome the above issue because here data is stored in map in state file)
 ```
 resource local_file  "file"{
   filename = each.value
