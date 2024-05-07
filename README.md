@@ -6,6 +6,12 @@
 3. terraform apply
 4. terraform show
 5. terraform destroy
+6. terraform validate
+7. terraform fmt
+8. terraform show -json
+9. terraform providers
+10. terraform output
+11. terraform refresh
 
 ## HCL(Hashicorp configuration language)
 
