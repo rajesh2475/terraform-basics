@@ -146,5 +146,13 @@ We can also define type and description in variable declaration
 3. command line flag (-var (while doing terraform apply))
 **Note** - It will override the values down the order
 
+# Output variables example
+```
+  output "instance_ip_addr" {
+  value = aws_instance.server.private_ip
+}
+
+```
+
 
 
