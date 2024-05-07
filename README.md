@@ -146,13 +146,55 @@ We can also define type and description in variable declaration
 3. command line flag (-var (while doing terraform apply))
 **Note** - It will override the values down the order
 
-# Output variables example
+# Output variables example (will show value of private_ip after terraform apply or terraform output)
 ```
   output "instance_ip_addr" {
   value = aws_instance.server.private_ip
 }
 
 ```
+## If you want to assign private_ip to resource
+```
+  "{aws_instance.server.private_ip}"
+```
 
+# terraform life cycle rules
+ - https://spacelift.io/blog/terraform-resource-lifecycle
+
+# Data Sources
+  - data sources allow terraform to read attributes from resource which are provisioned outside its control
+  - exmaple
+    ```
+      data "provider_type" "name" {
+        # Configuration options for the data source (filters)
+      }
+    ```
+# meta data 
+## Count
+variable files {
+  default = ["a.txt", "b.txt"]
+}
+```
+  resource local_file "pet" {
+    filename = "var.files[count.index]"
+    count = 3
+  }
+``` 
+count will create as array in state file, and uses the index asreference. so if you just "a.txt" from the list and do terraform apply it will delete both the files and recreate "b.txt"
+
+# For each (we can overcome the above issue because here data is stored in map in state file)
+```
+resource local_file  "file"{
+  filename = each.value
+  for_each = toSet(var.files)
+}
+```
+
+# Terraform module 
+```
+module "<modulename>" {
+source = "<git path or local path or model from registry>"
+}
+```
 
 
